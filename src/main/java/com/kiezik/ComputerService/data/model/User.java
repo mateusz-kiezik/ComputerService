@@ -1,5 +1,6 @@
 package com.kiezik.ComputerService.data.model;
 
+import com.kiezik.ComputerService.enums.AccountStatus;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,6 +50,9 @@ public class User {
 
     @Column
     private String description;
+
+    @Column(nullable = false)
+    private AccountStatus status;
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(

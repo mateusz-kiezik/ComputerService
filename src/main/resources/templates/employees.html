@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+<head>
+    <title>Employees</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <table border="1px">
+        <tr>
+            <th>Lp.</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Phone number</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="employee, stat : ${employees}">
+            <td th:text="${stat.count}"></td>
+            <td th:text="${employee.firstName}"></td>
+            <td th:text="${employee.lastName}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.phoneNumber}"></td>
+            <td>
+                <div th:if="${employee.status == '1'}">
+                    <form action="#" th:action="@{/employees}" th:object="${employee}" method="POST">
+                        <input type="hidden" th:value="${employee.id}" name="id">
+                        <button name="changeStatus" type="submit" value="">DISABLE</button>
+                    </form>
+                </div>
+                <div th:if="${employee.status == '0'}">
+                    <form action="#" th:action="@{/employees}" th:object="${employee}" method="POST">
+                        <input type="hidden" th:value="${employee.id}" name="id">
+                        <button name="changeStatus" type="submit" value="">ENABLE</button>
+                    </form>
+                </div>
+
+
+
+            </td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>
