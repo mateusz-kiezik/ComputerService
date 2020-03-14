@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,13 +18,10 @@ public class User {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String login;
+    private String email;
 
     @Column(nullable = false)
     private String password;
-
-    @Column(unique = true, nullable = false)
-    private String email;
 
     @Column(name = "phone_number", unique = true, nullable = false)
     private String phoneNumber;
@@ -51,6 +49,13 @@ public class User {
 
     @Column
     private String description;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
+    private List<Role> roles;
 
 
 }
