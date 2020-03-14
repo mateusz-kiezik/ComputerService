@@ -25,16 +25,38 @@ public class EmployeesController {
 
     @GetMapping
     public String employeesInit(Model model) {
-        model.addAttribute("employees", userService.getEmployees(3L));
-        //model.addAttribute("employees", userService.getEmployees(3L, AccountStatus.ENABLED));
+        model.addAttribute("employees", userService.getEmployees(2L));
         model.addAttribute("employee", new User());
         return "employees";
     }
 
+    @GetMapping
+    @RequestMapping("/add")
+    public String addEmployeeInit(Model model) {
+        model.addAttribute("employee", new User());
+        return "add-employee";
+    }
+
     @PostMapping
-    public String changeStatus(@ModelAttribute("form") User user) {
+    @RequestMapping("/add-employee")
+    public String addEmployee(@ModelAttribute("employee") User user) {
+        userService.addEmployee(user);
+        return "redirect:/employees";
+    }
+
+    @PostMapping
+    @RequestMapping("/change")
+    public String changeStatus(@ModelAttribute("employee") User user) {
         Long userId = user.getId();
         userService.changeStatus(userId);
+        return "redirect:/employees";
+    }
+
+    @PostMapping
+    @RequestMapping("/delete")
+    public String deleteEmployee(@ModelAttribute("employee") User user) {
+        Long userId = user.getId();
+        userService.deleteEmployee(userId);
         return "redirect:/employees";
     }
 

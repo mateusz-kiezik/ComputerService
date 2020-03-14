@@ -9,6 +9,9 @@
 </head>
 <body>
 <div layout:fragment="content">
+    <form action="#" th:action="@{/employees/add}">
+    <button type="submit">ADD EMPLOYEE</button>
+    </form>
 
     <table border="1px">
         <tr>
@@ -18,6 +21,7 @@
             <th>Email</th>
             <th>Phone number</th>
             <th>Actions</th>
+            <th>Status</th>
         </tr>
         <tr th:each="employee, stat : ${employees}">
             <td th:text="${stat.count}"></td>
@@ -26,22 +30,24 @@
             <td th:text="${employee.email}"></td>
             <td th:text="${employee.phoneNumber}"></td>
             <td>
-                <div th:if="${employee.status == '1'}">
-                    <form action="#" th:action="@{/employees}" th:object="${employee}" method="POST">
+                <div th:if="${employee.status.toString().equals('ENABLED')}">
+                    <form action="#" th:action="@{/employees/change}" th:object="${employee}" method="POST">
                         <input type="hidden" th:value="${employee.id}" name="id">
-                        <button name="changeStatus" type="submit" value="">DISABLE</button>
+                        <button name="changeStatus" type="submit">DISABLE</button>
                     </form>
                 </div>
-                <div th:if="${employee.status == '0'}">
-                    <form action="#" th:action="@{/employees}" th:object="${employee}" method="POST">
+                <div th:if="${employee.status.toString().equals('DISABLED')}">
+                    <form action="#" th:action="@{/employees/change}" th:object="${employee}" method="POST">
                         <input type="hidden" th:value="${employee.id}" name="id">
-                        <button name="changeStatus" type="submit" value="">ENABLE</button>
+                        <button name="changeStatus" type="submit">ENABLE</button>
                     </form>
                 </div>
-
-
-
+                <form action="#" th:action="@{/employees/delete}" th:object="${employee}" method="POST">
+                    <input type="hidden" th:value="${employee.id}" name="id">
+                    <button name="delete" type="submit">DELETE</button>
+                </form>
             </td>
+            <td th:text="${employee.status}"></td>
         </tr>
     </table>
 
