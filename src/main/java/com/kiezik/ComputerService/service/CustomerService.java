@@ -10,21 +10,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import static org.springframework.security.core.context.SecurityContextHolder.getContext;
 
 @Service
 @Transactional
-public class UserService {
+public class CustomerService {
 
     @Autowired
     private UserRepository userRepository;
 
-
-    public List<User> getEmployees(Long role) {
-        List<User> employeesList = userRepository.findAllByRoles_Id(role);
-        return employeesList;
+    public List<User> getCustomers() {
+        List<User> customersList = userRepository.findAllByRoles_Id(3L);
+        return customersList;
     }
 
     public void changeStatus(Long id) {
@@ -37,14 +33,14 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void deleteEmployee(Long id) {
+    public void deleteUser(Long id) {
         User user = userRepository.findById(id).get();
         userRepository.delete(user);
     }
 
-    public void addEmployee(User user) {
+    public void addUser(User user) {
         user.setStatus(AccountStatus.ENABLED);
-        user.setRoles(setRole(2L));
+        user.setRoles(setRole(3L));
         userRepository.save(user);
     }
 

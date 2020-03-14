@@ -45,8 +45,8 @@
             <ul class="nav navbar-nav">
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/employees}">Employees</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/warehouse}">Warehouse</a></li>
-                <li sec:authorize="hasRole('ROLE_SERVICE')"><a th:href="@{/users}">Users</a></li>
-                <li sec:authorize="hasRole('ROLE_SERVICE')"><a th:href="@{/tickets}">Tickets</a></li>
+                <li sec:authorize="hasRole('ROLE_SERVICE') || hasRole('ROLE_ADMIN')"><a th:href="@{/customers}">Customers</a></li>
+                <li sec:authorize="hasRole('ROLE_SERVICE') || hasRole('ROLE_ADMIN')"><a th:href="@{/tickets}">Tickets</a></li>
 
                 <li sec:authorize="isAuthenticated()"><p>Welcome <span sec:authentication="name"></span></p></li>
                 <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/my-tickets}">My tickets</a> </li>

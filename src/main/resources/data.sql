@@ -21,6 +21,5 @@ INSERT INTO users (id, email, password, phone_number, first_name, last_name, cit
 
 INSERT INTO user_role (user_id, role_id) VALUES
 (1,1),
-(1,2),
 (2,2),
 (3,3);

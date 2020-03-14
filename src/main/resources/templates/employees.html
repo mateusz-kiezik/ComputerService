@@ -31,18 +31,18 @@
             <td th:text="${employee.phoneNumber}"></td>
             <td>
                 <div th:if="${employee.status.toString().equals('ENABLED')}">
-                    <form action="#" th:action="@{/employees/change}" th:object="${employee}" method="POST">
+                    <form action="#" th:action="@{/employees/change-employee}" th:object="${employee}" method="POST">
                         <input type="hidden" th:value="${employee.id}" name="id">
                         <button name="changeStatus" type="submit">DISABLE</button>
                     </form>
                 </div>
                 <div th:if="${employee.status.toString().equals('DISABLED')}">
-                    <form action="#" th:action="@{/employees/change}" th:object="${employee}" method="POST">
+                    <form action="#" th:action="@{/employees/change-employee}" th:object="${employee}" method="POST">
                         <input type="hidden" th:value="${employee.id}" name="id">
                         <button name="changeStatus" type="submit">ENABLE</button>
                     </form>
                 </div>
-                <form action="#" th:action="@{/employees/delete}" th:object="${employee}" method="POST">
+                <form action="#" th:action="@{/employees/delete-employee}" th:object="${employee}" method="POST">
                     <input type="hidden" th:value="${employee.id}" name="id">
                     <button name="delete" type="submit">DELETE</button>
                 </form>

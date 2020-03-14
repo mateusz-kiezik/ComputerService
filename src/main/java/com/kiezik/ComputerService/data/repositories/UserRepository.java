@@ -16,5 +16,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     List<User> findAllByRoles_Id(Long role);
 
+
     List<User> findAllByRoles_IdAndStatus(Long role, AccountStatus status);
 }
