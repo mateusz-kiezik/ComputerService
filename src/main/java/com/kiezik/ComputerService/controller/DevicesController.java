@@ -41,6 +41,14 @@ public class DevicesController {
         return "add-device";
     }
 
+    @GetMapping
+    @RequestMapping("/find")
+    public String findDeviceInit(Model model) {
+        model.addAttribute("devices", deviceService.getAllDevices());
+        model.addAttribute("selectDevice", new Device());
+        return "find-device";
+    }
+
 
     @PostMapping
     @RequestMapping("/add-device")

@@ -14,6 +14,31 @@
         <button type="submit">ADD TICKET</button>
     </form>
 
+    <table border="1px">
+        <tr>
+            <th>Lp.</th>
+            <th>Date</th>
+            <th>Date repair</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Estimated cost</th>
+            <th>Device serial number</th>
+            <th>Employee email</th>
+            <th>Description</th>
+        </tr>
+        <tr th:each="ticket, stat : ${tickets}">
+            <td th:text="${stat.count}"></td>
+            <td th:text="${ticket.startDate}"></td>
+            <td th:text="${ticket.repairDate}"></td>
+            <td th:text="${ticket.type}"></td>
+            <td th:text="${ticket.status}"></td>
+            <td th:text="${ticket.estimatedCost}"></td>
+            <td th:text="${ticket.device.serialNumber}"></td>
+            <td th:text="${ticket.user.email}"></td>
+            <td th:text="${ticket.description}"></td>
+        </tr>
+    </table>
+
 </div>
 </body>
 </html>
