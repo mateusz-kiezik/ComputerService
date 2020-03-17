@@ -19,6 +19,10 @@ public class DeviceService {
         deviceRepository.save(device);
     }
 
+    public void editDevice(Device device) {
+        deviceRepository.save(device);
+    }
+
     public List<Device> getAllDevices() {
         List<Device> devicesList = deviceRepository.findAll();
         return devicesList;

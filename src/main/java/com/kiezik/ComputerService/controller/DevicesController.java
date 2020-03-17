@@ -49,6 +49,14 @@ public class DevicesController {
         return "find-device";
     }
 
+    @PostMapping
+    @RequestMapping("/edit")
+    public String editDeviceInit(@ModelAttribute("device")Device device, Model model) {
+        Device deviceEdit = deviceService.getDeviceById(device.getId());
+        model.addAttribute("device", deviceEdit);
+        return "edit-device";
+    }
+
 
     @PostMapping
     @RequestMapping("/add-device")
@@ -57,5 +65,12 @@ public class DevicesController {
         redirectAttributes.addFlashAttribute("device", device);
         deviceService.addDevice(device);
         return addTicket;
+    }
+
+    @PostMapping
+    @RequestMapping("edit-device")
+    public String editDevice(@ModelAttribute("device") Device device) {
+        deviceService.editDevice(device);
+        return "redirect:/devices";
     }
 }
