@@ -10,6 +10,8 @@
 <body>
 <div layout:fragment="content">
 
+    <h1>Add employee</h1>
+
     <form action="#" th:action="@{/employees/add-employee}" th:object="${employee}" method="POST">
         <label for="email">Email: </label>
         <input type="text" id="email" th:field="*{email}"><br>

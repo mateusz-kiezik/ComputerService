@@ -10,6 +10,8 @@
 <body>
 <div layout:fragment="content">
 
+    <h1>Tickets list</h1>
+
     <form action="#" th:action="@{/devices/add}">
         <button type="submit">ADD TICKET</button>
     </form>
@@ -25,6 +27,7 @@
             <th>Device serial number</th>
             <th>Employee email</th>
             <th>Description</th>
+            <th>Actions</th>
         </tr>
         <tr th:each="ticket, stat : ${tickets}">
             <td th:text="${stat.count}"></td>
@@ -36,6 +39,11 @@
             <td th:text="${ticket.device.serialNumber}"></td>
             <td th:text="${ticket.user.email}"></td>
             <td th:text="${ticket.description}"></td>
+            <td>
+                <form action="#" th:action="@{|/ticket/${ticket.id}|}">
+                    <button type="submit">EDIT</button>
+                </form>
+            </td>
         </tr>
     </table>
 

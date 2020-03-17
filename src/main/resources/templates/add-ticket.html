@@ -10,6 +10,8 @@
 <body>
 <div layout:fragment="content">
 
+    <h1>Add ticket</h1>
+
     <form action="#" th:action="@{/tickets/add-ticket}" th:object="${ticket}" method="POST">
         <label for="start-date">Date: </label>
         <input type="hidden" id="start-date"

@@ -10,6 +10,8 @@
 <body>
 <div layout:fragment="content">
 
+    <h1>Edit device</h1>
+
     <div th:if="${fromTicket == false}">
         <form action="#" th:action="@{/devices/edit-device}" th:object="${device}" method="POST">
             <label for="type">Type of device: </label>

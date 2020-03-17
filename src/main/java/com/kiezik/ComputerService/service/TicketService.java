@@ -31,6 +31,12 @@ public class TicketService {
         return ticketsList;
     }
 
+    public Ticket getTicket(Long ticketId) {
+        Ticket ticket = ticketRepository.getFirstById(ticketId);
+        return ticket;
+    }
+
+
     public void addTicket(Ticket ticket) {
         User user = employeeService.getEmployee(ticket.getUser().getId());
         ticket.setUser(user);
@@ -42,6 +48,10 @@ public class TicketService {
         ticket.setDevice(device);
         ticket.setStatus(TicketStatus.NEW);
         ticket.setStartDate(LocalDateTime.now());
+        ticketRepository.save(ticket);
+    }
+
+    public void saveTicket(Ticket ticket) {
         ticketRepository.save(ticket);
     }
 }
