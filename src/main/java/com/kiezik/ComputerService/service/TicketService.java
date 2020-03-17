@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -24,6 +25,11 @@ public class TicketService {
 
     @Autowired
     private DeviceService deviceService;
+
+    public List<Ticket> getAllTickets() {
+        List<Ticket> ticketsList = ticketRepository.findAll();
+        return ticketsList;
+    }
 
     public void addTicket(Ticket ticket) {
         User user = employeeService.getEmployee(ticket.getUser().getId());

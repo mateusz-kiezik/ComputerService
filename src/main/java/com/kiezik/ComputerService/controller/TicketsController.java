@@ -33,6 +33,7 @@ public class TicketsController {
 
     @GetMapping
     public String ticketsInit(Model model) {
+        model.addAttribute("tickets", ticketService.getAllTickets());
         return "tickets";
     }
 
