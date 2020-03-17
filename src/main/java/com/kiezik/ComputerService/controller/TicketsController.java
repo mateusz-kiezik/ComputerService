@@ -40,6 +40,7 @@ public class TicketsController {
     @GetMapping
     @RequestMapping("/add")
     public String addTicketInit(@ModelAttribute("device")Device device, Model model) {
+        deviceService.editDevice(device);
         model.addAttribute("ticket", new Ticket());
         model.addAttribute("employees", employeeService.getEmployees());
         model.addAttribute("deviceA", device);

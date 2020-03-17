@@ -51,7 +51,10 @@ public class DevicesController {
 
     @PostMapping
     @RequestMapping("/edit")
-    public String editDeviceInit(@ModelAttribute("device")Device device, Model model) {
+    public String editDeviceInit(@ModelAttribute("device") Device device,
+                                 @ModelAttribute("fromTicket") boolean fromTicket,
+                                 Model model) {
+
         Device deviceEdit = deviceService.getDeviceById(device.getId());
         model.addAttribute("device", deviceEdit);
         return "edit-device";

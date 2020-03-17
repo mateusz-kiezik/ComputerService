@@ -10,26 +10,49 @@
 <body>
 <div layout:fragment="content">
 
-    <form action="#" th:action="@{/devices/edit-device}" th:object="${device}" method="POST">
+    <div th:if="${fromTicket == false}">
+        <form action="#" th:action="@{/devices/edit-device}" th:object="${device}" method="POST">
+            <label for="type">Type of device: </label>
+            <select id="type" th:field="*{type}" >
+                <option th:value="'DESKTOP'" th:text="DESKTOP"></option>
+                <option th:value="'NOTEBOOK'" th:text="NOTEBOOK"></option>
+            </select><br>
+            <label for="name">Name: </label>
+            <input type="text" id="name" th:field="*{name}"><br>
+            <label for="serial-number">Serial number: </label>
+            <input type="text" id="serial-number" th:field="*{serialNumber}"><br>
+            <label for="power-supply">Power supply: </label>
+            <input type="checkbox" id="power-supply" th:field="*{powerSupply}"><br>
+            <label for="baterry">Baterry: </label>
+            <input type="checkbox" id="baterry" th:field="*{battery}"><br>
+            <label for="bag">Bag: </label>
+            <input type="checkbox" id="bag" th:field="*{bag}"><br>
+            <input type="hidden" name="id" th:value="${device.id}">
+            <button type="submit">SAVE</button>
+        </form>
+    </div>
 
-        <label for="type">Type of device: </label>
-        <select id="type" th:field="*{type}">
-            <option th:value="'DESKTOP'" th:text="DESKTOP"></option>
-            <option th:value="'NOTEBOOK'" th:text="NOTEBOOK"></option>
-        </select><br>
-        <label for="name">Name: </label>
-        <input type="text" id="name" th:field="*{name}"><br>
-        <label for="serial-number">Serial number: </label>
-        <input type="text" id="serial-number" th:field="*{serialNumber}"><br>
-        <label for="power-supply">Power supply: </label>
-        <input type="checkbox" id="power-supply" th:field="*{powerSupply}"><br>
-        <label for="baterry">Baterry: </label>
-        <input type="checkbox" id="baterry" th:field="*{battery}"><br>
-        <label for="bag">Bag: </label>
-        <input type="checkbox" id="bag" th:field="*{bag}"><br>
-        <input type="hidden" name="id" th:value="${device.id}">
-        <button type="submit">SAVE</button>
-    </form>
+    <div th:if="${fromTicket == true}">
+        <form action="#" th:action="@{/tickets/add}" th:object="${device}" method="POST">
+            <label for="type-t">Type of device: </label>
+            <select id="type-t" th:field="*{type}" >
+                <option th:value="'DESKTOP'" th:text="DESKTOP"></option>
+                <option th:value="'NOTEBOOK'" th:text="NOTEBOOK"></option>
+            </select><br>
+            <label for="name-t">Name: </label>
+            <input type="text" id="name-t" th:field="*{name}"><br>
+            <label for="serial-number-t">Serial number: </label>
+            <input type="text" id="serial-number-t" th:field="*{serialNumber}"><br>
+            <label for="power-supply-t">Power supply: </label>
+            <input type="checkbox" id="power-supply-t" th:field="*{powerSupply}"><br>
+            <label for="baterry-t">Baterry: </label>
+            <input type="checkbox" id="baterry-t" th:field="*{battery}"><br>
+            <label for="bag-t">Bag: </label>
+            <input type="checkbox" id="bag-t" th:field="*{bag}"><br>
+            <input type="hidden" name="id" th:value="${device.id}">
+            <button type="submit">SAVE AND CONTINUE</button>
+        </form>
+    </div>
 
 
 </div>

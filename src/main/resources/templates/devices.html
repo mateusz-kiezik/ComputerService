@@ -37,6 +37,7 @@
                 <td th:text="${device.bag}"></td>
                 <td th:text="${device.description}"></td>
                 <td>
+                    <input type="hidden" name="fromTicket" th:value="${false}">
                     <input type="hidden" name="id" th:value="${device.id}">
                     <button type="submit">EDIT</button>
                 </td>
