@@ -46,6 +46,7 @@
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/employees}">Employees</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/warehouse}">Warehouse</a></li>
                 <li sec:authorize="hasRole('ROLE_SERVICE') || hasRole('ROLE_ADMIN')"><a th:href="@{/customers}">Customers</a></li>
+                <li sec:authorize="hasRole('ROLE_SERVICE') || hasRole('ROLE_ADMIN')"><a th:href="@{/devices}">Devices</a></li>
                 <li sec:authorize="hasRole('ROLE_SERVICE') || hasRole('ROLE_ADMIN')"><a th:href="@{/tickets}">Tickets</a></li>
 
                 <li sec:authorize="isAuthenticated()"><p>Welcome <span sec:authentication="name"></span></p></li>
@@ -66,10 +67,9 @@
 <script th:src="@{'/assets/bootstrap/js/bootstrap.min.js'}"></script>
 
 <div class="footer">
-    <h1>
-        <a href="http://www.javaguides.net/p/spring-boot-tutorial.html">
-            Spring Boot Tutorial</a>
-    </h1>
+    <h3>
+        <a href="https://github.com/mateusz-kiezik">mateusz-kiezik</a>
+    </h3>
 </div>
 
 </body>

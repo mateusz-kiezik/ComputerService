@@ -27,6 +27,11 @@ public class EmployeeService {
         return employeesList;
     }
 
+    public User getEmployee(Long id) {
+        User user = userRepository.findById(id).get();
+        return user;
+    }
+
     public void changeStatus(Long id) {
         User user = userRepository.findById(id).get();
         if (user.getStatus() == AccountStatus.ENABLED) {

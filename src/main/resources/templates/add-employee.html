@@ -11,16 +11,16 @@
 <div layout:fragment="content">
 
     <form action="#" th:action="@{/employees/add-employee}" th:object="${employee}" method="POST">
-        <label for="email">Email:</label>
-        <input type="text" id="email" th:field="*{email}">
-        <label for="password">Password:</label>
-        <input type="password" id="password" th:field="*{password}">
-        <label for="first-name">First name:</label>
-        <input type="text" id="first-name" th:field="*{firstName}">
-        <label for="last-name">Last name:</label>
-        <input type="text" id="last-name" th:field="*{lastName}">
-        <label for="phone-number">Phone number:</label>
-        <input type="text" id="phone-number" th:field="*{phoneNumber}">
+        <label for="email">Email: </label>
+        <input type="text" id="email" th:field="*{email}"><br>
+        <label for="password">Password: </label>
+        <input type="password" id="password" th:field="*{password}"><br>
+        <label for="first-name">First name: </label>
+        <input type="text" id="first-name" th:field="*{firstName}"><br>
+        <label for="last-name">Last name: </label>
+        <input type="text" id="last-name" th:field="*{lastName}"><br>
+        <label for="phone-number">Phone number: </label>
+        <input type="text" id="phone-number" th:field="*{phoneNumber}"><br>
         <button type="submit">ADD</button>
     </form>
 

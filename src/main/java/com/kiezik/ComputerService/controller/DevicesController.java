@@ -2,8 +2,6 @@ package com.kiezik.ComputerService.controller;
 
 import com.kiezik.ComputerService.data.model.Device;
 import com.kiezik.ComputerService.data.model.Ticket;
-import com.kiezik.ComputerService.data.model.User;
-import com.kiezik.ComputerService.enums.TicketStatus;
 import com.kiezik.ComputerService.service.DeviceService;
 import com.kiezik.ComputerService.service.EmployeeService;
 import com.kiezik.ComputerService.service.TicketService;
@@ -15,40 +13,41 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.time.LocalDate;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
-@RequestMapping("/tickets")
-public class TicketsController {
+@RequestMapping("/devices")
+public class DevicesController {
 
     @Autowired
-    private TicketService ticketService;
+    private DeviceService deviceService;
 
     @Autowired
     private EmployeeService employeeService;
 
     @Autowired
-    private DeviceService deviceService;
+    private TicketService ticketService;
 
     @GetMapping
-    public String ticketsInit(Model model) {
-        return "tickets";
+    public String devicesInit(Model model) {
+        model.addAttribute("devices", deviceService.getAllDevices());
+        return "devices";
     }
 
     @GetMapping
     @RequestMapping("/add")
-    public String addTicketInit(@ModelAttribute("device")Device device, Model model) {
-        model.addAttribute("ticket", new Ticket());
-        model.addAttribute("employees", employeeService.getEmployees());
-        model.addAttribute("deviceA", device);
-        return "add-ticket";
+    public String addDeviceInit(Model model) {
+        model.addAttribute("device", new Device());
+        return "add-device";
     }
 
+
     @PostMapping
-    @RequestMapping("/add-ticket")
-    public String addTicket(@ModelAttribute("ticket") Ticket ticket) {
-        ticketService.addTicket(ticket);
-        return "redirect:/tickets";
+    @RequestMapping("/add-device")
+    public RedirectView addDevice(@ModelAttribute("device") Device device, RedirectAttributes redirectAttributes) {
+        RedirectView addTicket = new RedirectView("/tickets/add", true);
+        redirectAttributes.addFlashAttribute("device", device);
+        deviceService.addDevice(device);
+        return addTicket;
     }
 }

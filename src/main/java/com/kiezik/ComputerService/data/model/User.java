@@ -54,12 +54,13 @@ public class User {
     @Column(nullable = false)
     private AccountStatus status;
 
+    @OneToMany(mappedBy = "user")
+    private List<Ticket> tickets;
+
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "user_role",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
     private List<Role> roles;
-
-
 }
