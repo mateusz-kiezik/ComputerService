@@ -32,6 +32,15 @@ public class CustomersController {
         return "add-customer";
     }
 
+    @PostMapping
+    @RequestMapping("/edit")
+    public String editCustomerInit(@ModelAttribute("customer") User customer,
+                                   @ModelAttribute("fromTicket") Boolean fromTicket,
+                                   Model model) {
+        model.addAttribute("customer", customerService.getCustomer(customer.getId()));
+        return "edit-customer";
+    }
+
     @GetMapping
     @RequestMapping("/find")
     public String findCustomerInit(Model model) {
@@ -42,8 +51,15 @@ public class CustomersController {
 
     @PostMapping
     @RequestMapping("/add-customer")
-    public String addCustomer(@ModelAttribute("customer") User user) {
-        customerService.addUser(user);
+    public String addCustomer(@ModelAttribute("customer") User customer) {
+        customerService.addUser(customer);
+        return "redirect:/customers";
+    }
+
+    @PostMapping
+    @RequestMapping("/edit-customer")
+    public String editCustomer(@ModelAttribute("customer") User customer) {
+        customerService.editUser(customer);
         return "redirect:/customers";
     }
 

@@ -28,8 +28,8 @@ public class CustomerService {
         return user;
     }
 
-    public User getCustomerByEmail(String customerEmail) {
-        User user = userRepository.findByEmail(customerEmail).get();
+    public User getCustomerByUsername(String customerUsername) {
+        User user = userRepository.findByEmail(customerUsername).get();
         return user;
     }
 
@@ -54,15 +54,27 @@ public class CustomerService {
         userRepository.save(user);
     }
 
-    public Long addUserGetId(User user) {
-        if (user.getId() == null) {
-            user.setStatus(AccountStatus.ENABLED);
-            user.setRoles(setRole(3L));
-            return userRepository.save(user).getId();
-        } else
-            return user.getId();
-
+    public void editUser(User customer) {
+        User currentCustomer = userRepository.findById(customer.getId()).get();
+        customer.setStatus(currentCustomer.getStatus());
+        customer.setRoles(currentCustomer.getRoles());
+        userRepository.save(customer);
     }
+
+    public Long addUserGetId(User customer) {
+        if (customer.getId() == null) {
+            customer.setStatus(AccountStatus.ENABLED);
+            customer.setRoles(setRole(3L));
+            return userRepository.save(customer).getId();
+        } else if (customer.getStatus() == null) {
+            User currentCustomer = userRepository.findById(customer.getId()).get();
+            customer.setStatus(currentCustomer.getStatus());
+            customer.setRoles(currentCustomer.getRoles());
+            return userRepository.save(customer).getId();
+        } else
+            return customer.getId();
+    }
+
 
     public List<Role> setRole(Long roleId) {
         List<Role> roles = new ArrayList<>();

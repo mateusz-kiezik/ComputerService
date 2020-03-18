@@ -25,7 +25,7 @@
             <th>Email</th>
             <th>Phone number</th>
             <th>Status</th>
-            <th>Actions</th>
+            <th colspan="2">Actions</th>
         </tr>
         <tr th:each="customer, stat : ${customers}">
             <td th:text="${stat.count}"></td>
@@ -36,8 +36,16 @@
             <td th:text="${customer.status}"></td>
             <td>
                 <form action="#" th:action="@{/devices/add}" th:object="${customer}" method="POST">
+                    <input type="hidden" name="status" th:value="${customer.status}">
                     <input type="hidden" name="id" th:value="${customer.id}">
                     <button type="submit">SELECT</button>
+                </form>
+            </td>
+            <td>
+                <form action="#" th:action="@{/customers/edit}" th:object="${customer}" method="POST">
+                    <input type="hidden" name="fromTicket" th:value="${true}">
+                    <input type="hidden" name="id" th:value="${customer.id}">
+                    <button type="submit">EDIT</button>
                 </form>
             </td>
         </tr>
