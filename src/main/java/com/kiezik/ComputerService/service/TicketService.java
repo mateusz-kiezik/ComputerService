@@ -26,6 +26,9 @@ public class TicketService {
     @Autowired
     private DeviceService deviceService;
 
+    @Autowired
+    private CustomerService customerService;
+
     public List<Ticket> getAllTickets() {
         List<Ticket> ticketsList = ticketRepository.findAll();
         return ticketsList;
@@ -34,6 +37,12 @@ public class TicketService {
     public Ticket getTicket(Long ticketId) {
         Ticket ticket = ticketRepository.getFirstById(ticketId);
         return ticket;
+    }
+
+    public List<Ticket> getCustomerTickets(String customerUsername) {
+        Long customerId = customerService.getCustomerByUsername(customerUsername).getId();
+        List<Ticket> ticketsList = ticketRepository.findAllByDevice_Customer_Id(customerId);
+        return ticketsList;
     }
 
 
