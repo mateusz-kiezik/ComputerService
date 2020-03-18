@@ -57,6 +57,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Ticket> tickets;
 
+    @OneToMany(mappedBy = "customer")
+    private List<Device> devices;
+
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "user_role",

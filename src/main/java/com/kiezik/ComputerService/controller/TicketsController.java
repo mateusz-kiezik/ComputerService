@@ -39,11 +39,11 @@ public class TicketsController {
 
     @GetMapping
     @RequestMapping("/add")
-    public String addTicketInit(@ModelAttribute("device")Device device, Model model) {
-        deviceService.editDevice(device);
+    public String addTicketInit(@ModelAttribute("device") Device device, Model model) {
+        Long deviceId = deviceService.addDeviceandGetId(device);
         model.addAttribute("ticket", new Ticket());
         model.addAttribute("employees", employeeService.getEmployees());
-        model.addAttribute("deviceA", device);
+        model.addAttribute("device", deviceService.getDeviceById(deviceId));
         return "add-ticket";
     }
 

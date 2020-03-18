@@ -38,4 +38,8 @@ public class Device {
 
     @OneToMany(mappedBy = "device")
     private List<Ticket> tickets;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ID")
+    private User customer;
 }

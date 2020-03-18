@@ -28,7 +28,7 @@
         <input type="number" id="estimated-cost" th:field="*{estimatedCost}"><br>
         <label for="description">Description: </label>
         <input type="text" id="description" th:field="*{description}"><br>
-        <input type="hidden" name="device" th:value="${deviceA.id}">
+        <input type="hidden" name="device" th:value="${device.id}">
         <label for="service">Service: </label>
         <select id="service" th:field="*{user}">
             <option th:each="employee : ${employees}" th:value="${employee.id}"

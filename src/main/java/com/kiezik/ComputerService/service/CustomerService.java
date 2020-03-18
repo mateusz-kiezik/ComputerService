@@ -23,6 +23,16 @@ public class CustomerService {
         return customersList;
     }
 
+    public User getCustomer(Long customerId) {
+        User user = userRepository.findById(customerId).get();
+        return user;
+    }
+
+    public User getCustomerByEmail(String customerEmail) {
+        User user = userRepository.findByEmail(customerEmail).get();
+        return user;
+    }
+
     public void changeStatus(Long id) {
         User user = userRepository.findById(id).get();
         if (user.getStatus() == AccountStatus.ENABLED) {
@@ -42,6 +52,16 @@ public class CustomerService {
         user.setStatus(AccountStatus.ENABLED);
         user.setRoles(setRole(3L));
         userRepository.save(user);
+    }
+
+    public Long addUserGetId(User user) {
+        if (user.getId() == null) {
+            user.setStatus(AccountStatus.ENABLED);
+            user.setRoles(setRole(3L));
+            return userRepository.save(user).getId();
+        } else
+            return user.getId();
+
     }
 
     public List<Role> setRole(Long roleId) {

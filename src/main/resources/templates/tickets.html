@@ -12,7 +12,8 @@
 
     <h1>Tickets list</h1>
 
-    <form action="#" th:action="@{/devices/add}">
+    <form action="#" th:action="@{/customers/add}" method="POST">
+        <input type="hidden" name="fromTicket" th:value="${true}">
         <button type="submit">ADD TICKET</button>
     </form>
 

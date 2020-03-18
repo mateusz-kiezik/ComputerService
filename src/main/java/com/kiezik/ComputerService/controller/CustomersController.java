@@ -1,5 +1,6 @@
 package com.kiezik.ComputerService.controller;
 
+import com.kiezik.ComputerService.data.model.Device;
 import com.kiezik.ComputerService.data.model.User;
 import com.kiezik.ComputerService.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,19 @@ public class CustomersController {
         return "customers";
     }
 
-    @GetMapping
+    @PostMapping
     @RequestMapping("/add")
-    public String addCustomerInit(Model model) {
+    public String addCustomerInit(@ModelAttribute("fromTicket") boolean fromTicket, Model model) {
         model.addAttribute("customer", new User());
         return "add-customer";
+    }
+
+    @GetMapping
+    @RequestMapping("/find")
+    public String findCustomerInit(Model model) {
+        model.addAttribute("customers", customerService.getCustomers());
+        model.addAttribute("selectCustomer", new User());
+        return "find-customer";
     }
 
     @PostMapping

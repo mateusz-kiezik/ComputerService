@@ -1,7 +1,9 @@
 package com.kiezik.ComputerService.service;
 
 import com.kiezik.ComputerService.data.model.Device;
+import com.kiezik.ComputerService.data.model.User;
 import com.kiezik.ComputerService.data.repositories.DeviceRepository;
+import com.kiezik.ComputerService.data.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,9 +17,21 @@ public class DeviceService {
     @Autowired
     private DeviceRepository deviceRepository;
 
+    @Autowired
+    private CustomerService customerService;
+
+
     public void addDevice(Device device) {
         deviceRepository.save(device);
     }
+
+    public Long addDeviceandGetId(Device device) {
+        if (device.getId() == null) {
+            return deviceRepository.save(device).getId();
+        } else
+        return device.getId();
+    }
+
 
     public void editDevice(Device device) {
         deviceRepository.save(device);

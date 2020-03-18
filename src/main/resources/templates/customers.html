@@ -13,7 +13,8 @@
     <h1>Customers list</h1>
 
 
-    <form action="#" th:action="@{/customers/add}">
+    <form action="#" th:action="@{/customers/add}" method="POST">
+        <input type="hidden" name="fromTicket" th:value="${false}">
         <button type="submit">ADD CUSTOMER</button>
     </form>
 
@@ -24,8 +25,8 @@
             <th>Last name</th>
             <th>Email</th>
             <th>Phone number</th>
-            <th>Actions</th>
             <th>Status</th>
+            <th>Actions</th>
         </tr>
         <tr th:each="customer, stat : ${customers}">
             <td th:text="${stat.count}"></td>
@@ -33,6 +34,7 @@
             <td th:text="${customer.lastName}"></td>
             <td th:text="${customer.email}"></td>
             <td th:text="${customer.phoneNumber}"></td>
+            <td th:text="${customer.status}"></td>
             <td>
                 <div th:if="${customer.status.toString().equals('ENABLED')}">
                     <form action="#" th:action="@{/customers/change-customer}" th:object="${customer}" method="POST">
@@ -51,7 +53,7 @@
                     <button name="delete" type="submit">DELETE</button>
                 </form>
             </td>
-            <td th:text="${customer.status}"></td>
+
         </tr>
     </table>
 

@@ -30,6 +30,7 @@
         <label for="bag">Bag: </label>
         <input type="checkbox" id="bag" th:field="*{bag}"><br>
 
+        <input type="hidden" name="customer" th:value="${customer.id}">
         <button type="submit">ADD AND CONTINUE</button>
     </form>
 

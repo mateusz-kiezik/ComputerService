@@ -12,19 +12,43 @@
 
     <h1>Add customer</h1>
 
-    <form action="#" th:action="@{/customers/add-customer}" th:object="${customer}" method="POST">
-        <label for="email">Email: </label>
-        <input type="text" id="email" th:field="*{email}"><br>
-        <label for="password">Password: </label>
-        <input type="password" id="password" th:field="*{password}"><br>
-        <label for="first-name">First name: </label>
-        <input type="text" id="first-name" th:field="*{firstName}"><br>
-        <label for="last-name">Last name: </label>
-        <input type="text" id="last-name" th:field="*{lastName}"><br>
-        <label for="phone-number">Phone number: </label>
-        <input type="text" id="phone-number" th:field="*{phoneNumber}"><br>
-        <button type="submit">ADD</button>
-    </form>
+    <div th:if="${fromTicket == true}">
+
+        <form action="#" th:action="@{/devices/add}" th:object="${customer}" method="POST">
+            <label for="email-t">Email: </label>
+            <input type="text" id="email-t" th:field="*{email}"><br>
+            <label for="password-t">Password: </label>
+            <input type="password" id="password-t" th:field="*{password}"><br>
+            <label for="first-name-t">First name: </label>
+            <input type="text" id="first-name-t" th:field="*{firstName}"><br>
+            <label for="last-name-t">Last name: </label>
+            <input type="text" id="last-name-t" th:field="*{lastName}"><br>
+            <label for="phone-number-t">Phone number: </label>
+            <input type="text" id="phone-number-t" th:field="*{phoneNumber}"><br>
+            <button type="submit">ADD AND CONTINUE</button>
+        </form>
+        <form action="#" th:action="@{../customers/find}">
+            <button type="submit">FIND CUSTOMER</button>
+        </form>
+
+    </div>
+
+    <div th:if="${fromTicket == false}">
+
+        <form action="#" th:action="@{/customers/add-customer}" th:object="${customer}" method="POST">
+            <label for="email">Email: </label>
+            <input type="text" id="email" th:field="*{email}"><br>
+            <label for="password">Password: </label>
+            <input type="password" id="password" th:field="*{password}"><br>
+            <label for="first-name">First name: </label>
+            <input type="text" id="first-name" th:field="*{firstName}"><br>
+            <label for="last-name">Last name: </label>
+            <input type="text" id="last-name" th:field="*{lastName}"><br>
+            <label for="phone-number">Phone number: </label>
+            <input type="text" id="phone-number" th:field="*{phoneNumber}"><br>
+            <button type="submit">ADD</button>
+        </form>
+    </div>
 
 </div>
 </body>

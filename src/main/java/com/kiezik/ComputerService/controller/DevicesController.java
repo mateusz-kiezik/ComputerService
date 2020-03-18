@@ -2,6 +2,8 @@ package com.kiezik.ComputerService.controller;
 
 import com.kiezik.ComputerService.data.model.Device;
 import com.kiezik.ComputerService.data.model.Ticket;
+import com.kiezik.ComputerService.data.model.User;
+import com.kiezik.ComputerService.service.CustomerService;
 import com.kiezik.ComputerService.service.DeviceService;
 import com.kiezik.ComputerService.service.EmployeeService;
 import com.kiezik.ComputerService.service.TicketService;
@@ -28,15 +30,20 @@ public class DevicesController {
     @Autowired
     private TicketService ticketService;
 
+    @Autowired
+    private CustomerService customerService;
+
     @GetMapping
     public String devicesInit(Model model) {
         model.addAttribute("devices", deviceService.getAllDevices());
         return "devices";
     }
 
-    @GetMapping
+    @PostMapping
     @RequestMapping("/add")
-    public String addDeviceInit(Model model) {
+    public String addDeviceInit(@ModelAttribute("customer") User customer, Model model) {
+        Long customerId = customerService.addUserGetId(customer);
+        model.addAttribute("customer", customerService.getCustomer(customerId));
         model.addAttribute("device", new Device());
         return "add-device";
     }
@@ -63,10 +70,11 @@ public class DevicesController {
 
     @PostMapping
     @RequestMapping("/add-device")
-    public RedirectView addDevice(@ModelAttribute("device") Device device, RedirectAttributes redirectAttributes) {
+    public RedirectView addDevice(@ModelAttribute("device") Device device,
+                                  RedirectAttributes redirectAttributes) {
         RedirectView addTicket = new RedirectView("/tickets/add", true);
-        redirectAttributes.addFlashAttribute("device", device);
         deviceService.addDevice(device);
+        redirectAttributes.addFlashAttribute("device", device);
         return addTicket;
     }
 
