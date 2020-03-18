@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+<head>
+    <title>Devices</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h1>Devices list</h1>
+
+    <table border="1px">
+        <tr>
+            <th rowspan="2">Lp.</th>
+            <th rowspan="2">Type</th>
+            <th rowspan="2">Name</th>
+            <th rowspan="2">Serial number</th>
+            <th colspan="3">Accessories</th>
+            <th rowspan="2">Description</th>
+            <th rowspan="2">Edit</th>
+        </tr>
+        <tr>
+            <td>Power supply</td>
+            <td>Battery</td>
+            <td>Bag</td>
+        </tr>
+        <tr th:each="device, stat : ${devices}">
+            <form action="#" th:action="@{/devices/edit}" th:object="${device}" method="POST">
+                <td th:text="${stat.count}"></td>
+                <td th:text="${device.type}"></td>
+                <td th:text="${device.name}"></td>
+                <td th:text="${device.serialNumber}"></td>
+                <td th:text="${device.powerSupply}"></td>
+                <td th:text="${device.battery}"></td>
+                <td th:text="${device.bag}"></td>
+                <td th:text="${device.description}"></td>
+                <td>
+                    <input type="hidden" name="fromTicket" th:value="${false}">
+                    <input type="hidden" name="id" th:value="${device.id}">
+                    <button type="submit">EDIT</button>
+                </td>
+            </form>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

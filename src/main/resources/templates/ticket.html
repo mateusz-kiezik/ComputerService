@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+<head>
+    <title>Ticket</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <form action="#" th:action="@{/ticket/save}" th:object="${ticket}" method="POST">
+
+    <h1>Ticket #000<span th:text="${ticket.id}"></span></h1>
+        <input type="hidden" th:field="${ticket.id}">
+
+    <b>Start date: </b>
+    <span th:text="${ticket.startDate}"></span>
+        <input type="hidden" th:field="${ticket.startDate}"><br>
+
+    <b>Repair date: </b>
+    <span th:text="${ticket.repairDate}"></span>
+        <input type="hidden" th:field="${ticket.repairDate}"><br>
+
+    <b>Type: </b>
+    <span th:text="${ticket.type}"></span>
+        <input type="hidden" th:field="${ticket.type}"><br>
+
+    <b>Status: </b>
+    <select th:field="${ticket.status}">
+        <option th:value="'NEW'" th:text="NEW"></option>
+        <option th:value="'PENDING'" th:text="PENDING"></option>
+        <option th:value="'CANCELED'" th:text="CANCELED"></option>
+        <option th:value="'CLOSED'" th:text="CLOSED"></option>
+    </select><br>
+
+    <b>Estimated cost: </b>
+    <span th:text="${ticket.estimatedCost}"></span>
+        <input type="hidden" th:field="${ticket.estimatedCost}"><br>
+
+    <b>Description: </b>
+    <span th:text="${ticket.description}"></span>
+        <input type="hidden" th:field="${ticket.description}"><br>
+
+    <b>Serviceman: </b>
+        <select th:field="${ticket.user.id}">
+            <option th:each="employee : ${employees}" th:value="${employee.id}"
+                    th:text="${employee.firstName} + ' ' + ${employee.lastName} + ' (' + ${employee.email} + ')'"></option>
+        </select><br>
+
+    <b>Device: </b>
+    <span th:text="${ticket.device.name}"></span>
+
+    <span th:text="${ticket.device.serialNumber}"></span><br>
+        <input type="hidden" th:field="${ticket.device.id}"><br>
+
+    <button type="submit">SAVE</button>
+    </form>
+</div>
+</body>
+</html>

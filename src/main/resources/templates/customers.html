@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+<head>
+    <title>Customers</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h1>Customers list</h1>
+
+
+    <form action="#" th:action="@{/customers/add}" method="POST">
+        <input type="hidden" name="fromTicket" th:value="${false}">
+        <button type="submit">ADD CUSTOMER</button>
+    </form>
+
+    <table border="1px">
+        <tr>
+            <th>Lp.</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Phone number</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="customer, stat : ${customers}">
+            <td th:text="${stat.count}"></td>
+            <td th:text="${customer.firstName}"></td>
+            <td th:text="${customer.lastName}"></td>
+            <td th:text="${customer.email}"></td>
+            <td th:text="${customer.phoneNumber}"></td>
+            <td th:text="${customer.status}"></td>
+            <td>
+                <div th:if="${customer.status.toString().equals('ENABLED')}">
+                    <form action="#" th:action="@{/customers/change-customer}" th:object="${customer}" method="POST">
+                        <input type="hidden" th:value="${customer.id}" name="id">
+                        <button name="changeStatus" type="submit">DISABLE</button>
+                    </form>
+                </div>
+                <div th:if="${customer.status.toString().equals('DISABLED')}">
+                    <form action="#" th:action="@{/customers/change-customer}" th:object="${customer}" method="POST">
+                        <input type="hidden" th:value="${customer.id}" name="id">
+                        <button name="changeStatus" type="submit">ENABLE</button>
+                    </form>
+                </div>
+                <form action="#" th:action="@{/customers/delete-customer}" th:object="${customer}" method="POST">
+                    <input type="hidden" th:value="${customer.id}" name="id">
+                    <button name="delete" type="submit">DELETE</button>
+                </form>
+            </td>
+
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

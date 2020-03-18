@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+<head>
+    <title>Add device</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h1>Add device</h1>
+
+    <form action="#" th:action="@{/devices/add-device}" th:object="${device}" method="POST">
+
+        <label for="type">Type of device: </label>
+        <select id="type" th:field="*{type}">
+            <option th:value="'DESKTOP'" th:text="DESKTOP"></option>
+            <option th:value="'NOTEBOOK'" th:text="NOTEBOOK"></option>
+        </select><br>
+        <label for="name">Name: </label>
+        <input type="text" id="name" th:field="*{name}"><br>
+        <label for="serial-number">Serial number: </label>
+        <input type="text" id="serial-number" th:field="*{serialNumber}"><br>
+        <label for="power-supply">Power supply: </label>
+        <input type="checkbox" id="power-supply" th:field="*{powerSupply}"><br>
+        <label for="baterry">Baterry: </label>
+        <input type="checkbox" id="baterry" th:field="*{battery}"><br>
+        <label for="bag">Bag: </label>
+        <input type="checkbox" id="bag" th:field="*{bag}"><br>
+
+        <input type="hidden" name="customer" th:value="${customer.id}">
+        <button type="submit">ADD AND CONTINUE</button>
+    </form>
+
+    <form action="#" th:action="@{../devices/find}">
+        <button type="submit">FIND DEVICE</button>
+    </form>
+
+</div>
+</body>
+</html>
